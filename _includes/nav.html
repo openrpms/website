@@ -8,11 +8,7 @@
         href="{{ "/" | relative_url }}"
         class="-m-1.5 p-1.5 flex items-center gap-2"
       >
-        <img
-          class="h-7 w-auto"
-          src="{{ "/assets/img/mark.svg" | relative_url }}"
-          alt=""
-        >
+        {% include icons/mark.html class="h-7 w-auto text-neutral-900 dark:text-white" %}
         <span class="text-sm font-bold tracking-tight text-neutral-900 dark:text-white">
           OpenRPMS
         </span>
@@ -44,26 +40,31 @@
       </button>
     </div>
     <div class="hidden lg:flex lg:gap-x-8">
+      {% for item in site.data.nav.main %}
+      {% include nav-current.html item=item %}
       <a
-        href="{{ "/demo" | relative_url }}"
-        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
+        href="{{ item.url | relative_url }}"
+        class="text-sm/6 font-semibold {% if nav_current %}text-neutral-900 dark:text-white underline underline-offset-8 decoration-2{% else %}text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white{% endif %}"
+        {% if nav_current %}aria-current="page"{% endif %}
       >
-        Try it
+        {{ item.label }}
       </a>
-      <a
-        href="{{ "/install" | relative_url }}"
-        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
-      >
-        Install it
-      </a>
-      <a
-        href="https://github.com/openrpms"
-        class="text-sm/6 font-semibold text-neutral-900 dark:text-neutral-100"
-      >
-        Contribute
-      </a>
+      {% endfor %}
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      {% if site.github_url %}
+      <a
+        href="{{ site.github_url }}"
+        class="inline-flex items-center text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="sr-only">
+          OpenRPMS on GitHub
+        </span>
+        {% include icons/github.html class="size-6" %}
+      </a>
+      {% endif %}
     </div>
   </nav>
 
@@ -85,11 +86,7 @@
           class="-m-1.5 p-1.5"
         >
           <span class="sr-only">{{ site.title }}</span>
-          <img
-            class="h-8 w-auto"
-            src="{{ "/assets/img/mark.svg" | relative_url }}"
-            alt=""
-          >
+          {% include icons/mark.html class="h-8 w-auto text-neutral-900 dark:text-white" %}
         </a>
         <button
           type="button"
@@ -116,50 +113,38 @@
       <div class="mt-6 flow-root">
         <div class="-my-6 divide-y divide-neutral-500/10">
           <div class="space-y-2 py-6">
+            {% for item in site.data.nav.main %}
+            {% include nav-current.html item=item %}
             <a
-              href="{{ "/demo" | relative_url }}"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+              href="{{ item.url | relative_url }}"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800 {% if nav_current %}bg-neutral-100 dark:bg-neutral-800{% endif %}"
+              {% if nav_current %}aria-current="page"{% endif %}
             >
-              Try it
+              {{ item.label }}
             </a>
-            <a
-              href="{{ "/install" | relative_url }}"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
-            >
-              Install it
-            </a>
-            <a
-              href="https://github.com/openrpms"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
-            >
-              Contribute
-            </a>
+            {% endfor %}
           </div>
-          <div class="space-y-2 py-6">
+          <div class="space-y-1 py-6">
+            {% for item in site.data.nav.footer %}
             <a
-              href="{{ "/design" | relative_url }}"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+              href="{% if item.external %}{{ item.url }}{% else %}{{ item.url | relative_url }}{% endif %}"
+              class="-mx-3 block rounded-lg px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-50 dark:text-neutral-400 dark:hover:bg-neutral-800"
+              {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}
             >
-              People
+              {{ item.label }}
             </a>
+            {% endfor %}
+            {% if site.github_url %}
             <a
-              href="{{ "/workflows" | relative_url }}"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
+              href="{{ site.github_url }}"
+              class="-mx-3 flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm text-neutral-600 hover:bg-neutral-50 dark:text-neutral-400 dark:hover:bg-neutral-800"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Workflows
+              {% include icons/github.html class="size-4" %}
+              GitHub
             </a>
-            <a
-              href="{{ "/reference" | relative_url }}"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
-            >
-              Reference
-            </a>
-            <a
-              href="{{ "/together" | relative_url }}"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-900 hover:bg-neutral-50 dark:text-neutral-100 dark:hover:bg-neutral-800"
-            >
-              Build with us
-            </a>
+            {% endif %}
           </div>
         </div>
       </div>

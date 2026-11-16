@@ -1,0 +1,33 @@
+<footer class="border-t border-neutral-200 dark:border-neutral-800 mt-16">
+  <div class="mx-auto max-w-4xl px-6 py-8 lg:px-8 flex flex-col gap-4">
+    <nav
+      class="flex flex-wrap gap-x-6 gap-y-2"
+      aria-label="Footer"
+    >
+      {% for item in site.data.nav.footer %}
+      <a
+        href="{% if item.external %}{{ item.url }}{% else %}{{ item.url | relative_url }}{% endif %}"
+        class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+        {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}
+      >
+        {{ item.label }}
+      </a>
+      {% endfor %}
+      {% if site.github_url %}
+      <a
+        href="{{ site.github_url }}"
+        class="inline-flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {% include icons/github.html class="size-4" %}
+        GitHub
+      </a>
+      {% endif %}
+    </nav>
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Open source, built in the open.
+      Not affiliated with the Indian Health Service.
+    </p>
+  </div>
+</footer>

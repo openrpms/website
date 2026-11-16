@@ -1,0 +1,11 @@
+{% comment %}
+  Sets `nav_current` to true when the current page belongs to include.item's section (see _data/nav.yml `match`).
+{% endcomment %}
+{% assign nav_current = false %}
+{% for prefix in include.item.match %}
+  {% assign prefix_slash = prefix | append: "/" %}
+  {% assign prefix_html = prefix | append: ".html" %}
+  {% if page.url == prefix or page.url == prefix_slash or page.url == prefix_html or page.url contains prefix_slash %}
+    {% assign nav_current = true %}
+  {% endif %}
+{% endfor %}
