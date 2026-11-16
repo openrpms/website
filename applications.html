@@ -1,136 +1,334 @@
 ---
 layout: default
-title: "Application Catalog"
-description: "All 70+ RPMS modules organized by domain: Clinical, Administrative, and Infrastructure."
+title: "Applications"
+description: "The interfaces and views people work in, built on RPMS: VueCentric, iCare, Behavioral Health, BPRM, and lakeraven-ehr."
 ---
 
 <div class="bg-white dark:bg-neutral-950">
   {% include nav.html %}
 
-  <main class="mx-auto max-w-6xl px-6 py-16 lg:px-8">
+  <main class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
 
-    <div class="mb-12">
+    <div class="mb-12 max-w-3xl">
       <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
-        Application Catalog
+        Applications
       </h1>
       <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
-        RPMS is a federated, modular system built over decades.
-        Each application is identified by a short namespace prefix (e.g. <code class="font-mono text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">GMRA</code>, <code class="font-mono text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">BQI</code>) that scopes its globals, routines, and file numbers within the MUMPS/FileMan environment.
-        Over 50 certified applications span clinical, administrative, and infrastructure domains.
+        RPMS holds the data and the core logic.
+        The applications are the interfaces and views people actually work in.
+        Each one asks the server for what it needs, almost always through
+        <a
+          href="{{ "/rpcs" | relative_url }}"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >RPCs</a>,
+        so the same record is shared by everyone who opens it.
       </p>
-      <p class="mt-3 text-sm text-neutral-500 dark:text-neutral-500">
-        This catalog is an open-source reference derived from public IHS documentation.
-        See <a href="/licensing" class="underline hover:text-neutral-700 dark:hover:text-neutral-300">Licensing</a> for status of each component.
+      <p class="mt-3 text-neutral-600 dark:text-neutral-400">
+        Here are the main ones, who works in each, and what to know before you reuse it.
+        Which of them work with a release built from the public files is covered in detail on
+        <a
+          href="{{ "/build" | relative_url }}"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >How a release is built</a>.
       </p>
     </div>
 
-    <!-- Clinical -->
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
-        Clinical Applications
-      </h2>
-      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
-        Collect all patient-related information gathered during patient encounters into a comprehensive, centralized data file.
-        Support healthcare planning, delivery, management, and research.
-      </p>
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {% assign clinical_pkgs = site.data.packages | where: "kind", "clinical" | sort: "namespace" %}
-        {% for pkg in clinical_pkgs %}
+    <div class="space-y-6">
+
+      <article
+        id="vuecentric"
+        class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 scroll-mt-6"
+      >
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+          VueCentric, the chart
+        </h2>
+        <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+          The Windows desktop where clinicians review the patient, write notes, and place orders.
+          It hosts the parts of the chart, such as the cover sheet, problems, medications, and notes, in one window.
+        </p>
+        <dl class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Who works in it
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              <a
+                href="{{ "/users" | relative_url }}#role-provider"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Providers</a>,
+              <a
+                href="{{ "/users" | relative_url }}#role-nurse"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >nurses</a>,
+              <a
+                href="{{ "/users" | relative_url }}#role-medical_assistant"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >medical assistants</a>, and
+              <a
+                href="{{ "/users" | relative_url }}#role-coder"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >coders</a>
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Connects through
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              The CIA broker
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Runs on
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              IRIS or YottaDB
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+          <strong class="text-neutral-900 dark:text-white">Know this:</strong>
+          a few commercial libraries the chart needs are not in the public files.
+          A clinic with a licensed IHS install already has them.
+        </p>
+      </article>
+
+      <article
+        id="icare"
+        class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 scroll-mt-6"
+      >
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+          iCare, the patient panel
+        </h2>
+        <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+          The program for looking across a group of patients, rather than one chart at a time.
+          It builds panels by provider, condition, or criteria, and shows who is due for care and who needs follow-up.
+        </p>
+        <dl class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Who works in it
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              <a
+                href="{{ "/users" | relative_url }}#role-care_manager"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Care and case managers</a>
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Connects through
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              The BMX broker
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Runs on
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              IRIS or YottaDB
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+          <strong class="text-neutral-900 dark:text-white">Know this:</strong>
+          the server side of iCare is in the release.
+          The desktop program is a separate IHS download.
+        </p>
+      </article>
+
+      <article
+        id="behavioral-health"
+        class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 scroll-mt-6"
+      >
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+          Behavioral Health
+        </h2>
+        <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+          The Behavioral Health System keeps behavioral health records in the same chart as the rest of the clinic, while limiting who can read them.
+          Notes are written under behavioral health titles, and only the clinicians allowed to see them can open them.
+          Other providers can see that a note exists without seeing what it says.
+        </p>
+        <dl class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Who works in it
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              <a
+                href="{{ "/users" | relative_url }}#role-bh_provider"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Behavioral health providers</a>
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Where
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              Inside VueCentric, and its own text screens
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Why it matters
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              Substance use records are protected by 42 CFR Part 2
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
           <a
-            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
-            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
-          >
-            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
-            <div class="min-w-0">
-              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
-              {% if pkg.restricted %}
-              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
-              {% elsif pkg.deprecated %}
-              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
-              {% elsif pkg.version %}
-              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
-              {% endif %}
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    </section>
+            href="{{ "/users" | relative_url }}#behavioral-health"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+          >Keep behavioral health records private</a>
+          is the use case it serves.
+        </p>
+      </article>
 
-    <!-- Administrative -->
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
-        Administrative Applications
-      </h2>
-      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
-        Support the business of providing healthcare — patient registration, scheduling, billing, credentialing, accounts receivable, and compliance reporting.
-      </p>
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {% assign admin_pkgs = site.data.packages | where: "kind", "administrative" | sort: "namespace" %}
-        {% for pkg in admin_pkgs %}
+      <article
+        id="bprm"
+        class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 scroll-mt-6"
+      >
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+          BPRM, the front desk
+        </h2>
+        <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+          Practice management: registration, scheduling, and billing, in a web application that runs on a Windows server.
+        </p>
+        <dl class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Who works in it
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              <a
+                href="{{ "/users" | relative_url }}#role-front_desk_clerk"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Front desk</a>,
+              <a
+                href="{{ "/users" | relative_url }}#role-scheduler"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >scheduling</a>,
+              <a
+                href="{{ "/users" | relative_url }}#role-benefits_coordinator"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >benefits</a>, and
+              <a
+                href="{{ "/users" | relative_url }}#role-admissions_clerk"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >admissions</a>
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Connects through
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              The database directly, through BMW, not RPCs
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Runs on
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              IRIS only
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+          <strong class="text-neutral-900 dark:text-white">Know this:</strong>
+          BPRM needs an IRIS license and IHS's installer.
+          On YottaDB, registration and scheduling go through the server's own interfaces instead.
+        </p>
+      </article>
+
+      <article
+        id="lakeraven-ehr"
+        class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6 scroll-mt-6"
+      >
+        <h2 class="text-xl font-bold text-neutral-900 dark:text-white">
+          lakeraven-ehr, on the web
+        </h2>
+        <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+          A web front end for RPMS, open source under the MIT license.
+          It runs in a browser, reads and writes through the same RPCs the desktop programs use, and keeps no clinical data of its own.
+          RPMS stays the system of record.
+        </p>
+        <dl class="mt-4 grid gap-3 sm:grid-cols-3 text-sm">
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Who works in it
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              Clinic staff, from a browser
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Connects through
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              The CIA or XWB broker, using the rpms-rpc library
+            </dd>
+          </div>
+          <div>
+            <dt class="font-medium text-neutral-900 dark:text-white">
+              Runs on
+            </dt>
+            <dd class="text-neutral-700 dark:text-neutral-300">
+              IRIS or YottaDB
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+          <strong class="text-neutral-900 dark:text-white">Try it:</strong>
+          the public demo at
           <a
-            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
-            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
-          >
-            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
-            <div class="min-w-0">
-              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
-              {% if pkg.restricted %}
-              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
-              {% elsif pkg.deprecated %}
-              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
-              {% elsif pkg.version %}
-              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
-              {% endif %}
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    </section>
-
-    <!-- Infrastructure -->
-    <section class="mb-16">
-      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
-        Infrastructure Applications
-      </h2>
-      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
-        Provide the RPMS environment with management, development, and communication tools.
-        These are the foundation every other application depends on.
-      </p>
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {% assign infra_pkgs = site.data.packages | where: "kind", "infrastructure" | sort: "namespace" %}
-        {% for pkg in infra_pkgs %}
+            href="https://demo.openrpms.org"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+          >demo.openrpms.org</a>
+          runs lakeraven-ehr on a release built from the public files.
+          The source is at
           <a
-            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
-            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
-          >
-            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
-            <div class="min-w-0">
-              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
-              {% if pkg.restricted %}
-              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
-              {% elsif pkg.deprecated %}
-              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
-              {% elsif pkg.version %}
-              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
-              {% endif %}
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    </section>
+            href="https://github.com/lakeraven/lakeraven-ehr"
+            class="underline hover:text-neutral-900 dark:hover:text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+          >github.com/lakeraven/lakeraven-ehr</a>.
+        </p>
+      </article>
 
-    <!-- Pattern callout -->
-    <section class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-8">
-      <h2 class="text-lg font-bold text-neutral-900 dark:text-white mb-3">
-        Pattern: Namespace as Module Boundary
-      </h2>
-      <p class="text-neutral-700 dark:text-neutral-300 text-sm">
-        Every RPMS application owns a short uppercase namespace prefix.
-        This prefix scopes all globals, routines, and FileMan file numbers for that module — preventing collisions across the 70+ applications sharing a single MUMPS environment.
-        It is an early, pragmatic implementation of the same isolation that modern systems achieve with packages, services, or namespaces.
-        When building interoperable health systems, explicit module boundaries and stable identifiers are a foundational pattern worth carrying forward.
+    </div>
+
+    <div class="mt-12 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        Building a new application?
+        Start with
+        <a
+          href="{{ "/rpcs" | relative_url }}"
+          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+        >RPCs</a>
+        for what the server answers, and
+        <a
+          href="{{ "/users" | relative_url }}"
+          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+        >Users &amp; use cases</a>
+        for who you are building it for.
+        The server's own packages are listed on
+        <a
+          href="{{ "/packages" | relative_url }}"
+          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+        >Packages</a>.
       </p>
-    </section>
+    </div>
 
+    {% include layer-links.html layer="applications" current="/applications" %}
   </main>
 </div>

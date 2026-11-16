@@ -1,11 +1,151 @@
 ---
 layout: default
-title: "Applications"
-redirect_to: /applications
+title: "Packages"
+description: "Every RPMS package, organized by domain: clinical, administrative, and infrastructure."
 ---
 
-<meta http-equiv="refresh" content="0; url=/applications">
-<script>window.location.href = '/applications';</script>
-<p>
-  Redirecting to <a href="/applications">Application Catalog</a>…
-</p>
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-6xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Packages
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS is a federated, modular system built over decades.
+        Each package is identified by a short namespace prefix (e.g. <code class="font-mono text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">GMRA</code>, <code class="font-mono text-sm bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">BQI</code>) that scopes its globals, routines, and file numbers within the MUMPS/FileMan environment.
+        IHS counts more than 50 certified applications, across clinical, administrative, and infrastructure domains.
+      </p>
+      <p class="mt-3 text-sm text-neutral-500 dark:text-neutral-500">
+        This catalog is an open-source reference derived from public IHS documentation.
+        See <a href="/licensing" class="underline hover:text-neutral-700 dark:hover:text-neutral-300">Licensing</a> for status of each component.
+      </p>
+      <p class="mt-3 text-neutral-700 dark:text-neutral-300">
+        The entries below are the server.
+        The programs staff open sit on top of them: VueCentric for the chart, iCare for a panel of patients, BPRM for the front desk, and lakeraven-ehr on the web.
+        Those are on
+        <a
+          href="{{ "/applications" | relative_url }}"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >Applications</a>.
+        Which of those you can reuse, and which files the chart is missing, is on
+        <a
+          href="{{ "/build" | relative_url }}"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >How a release is built</a>.
+      </p>
+    </div>
+
+    <!-- Clinical -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Clinical Applications
+      </h2>
+      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+        Collect all patient-related information gathered during patient encounters into a comprehensive, centralized data file.
+        Support healthcare planning, delivery, management, and research.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {% assign clinical_pkgs = site.data.packages | where: "kind", "clinical" | sort: "namespace" %}
+        {% for pkg in clinical_pkgs %}
+          <a
+            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+          >
+            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
+            <div class="min-w-0">
+              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
+              {% if pkg.restricted %}
+              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
+              {% elsif pkg.deprecated %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
+              {% elsif pkg.version %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Administrative -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Administrative Applications
+      </h2>
+      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+        Support the business of providing healthcare — patient registration, scheduling, billing, credentialing, accounts receivable, and compliance reporting.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {% assign admin_pkgs = site.data.packages | where: "kind", "administrative" | sort: "namespace" %}
+        {% for pkg in admin_pkgs %}
+          <a
+            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+          >
+            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
+            <div class="min-w-0">
+              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
+              {% if pkg.restricted %}
+              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
+              {% elsif pkg.deprecated %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
+              {% elsif pkg.version %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Infrastructure -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-6">
+        Infrastructure Applications
+      </h2>
+      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+        Provide the RPMS environment with management, development, and communication tools.
+        These are the foundation every other application depends on.
+      </p>
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {% assign infra_pkgs = site.data.packages | where: "kind", "infrastructure" | sort: "namespace" %}
+        {% for pkg in infra_pkgs %}
+          <a
+            href="{{ "/packages/" | append: pkg.namespace | downcase | relative_url }}"
+            class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-4 flex items-start gap-3 hover:border-neutral-400 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors group"
+          >
+            <code class="shrink-0 text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded mt-0.5">{{ pkg.namespace }}</code>
+            <div class="min-w-0">
+              <span class="text-sm text-neutral-800 dark:text-neutral-200 group-hover:text-neutral-900 dark:group-hover:text-white">{{ pkg.name }}</span>
+              {% if pkg.restricted %}
+              <span class="block text-xs text-red-600 dark:text-red-400 mt-0.5">restricted</span>
+              {% elsif pkg.deprecated %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-600 mt-0.5">deprecated</span>
+              {% elsif pkg.version %}
+              <span class="block text-xs text-neutral-400 dark:text-neutral-500 mt-0.5">v{{ pkg.version }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Pattern callout -->
+    <section class="rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-8">
+      <h2 class="text-lg font-bold text-neutral-900 dark:text-white mb-3">
+        Pattern: Namespace as Module Boundary
+      </h2>
+      <p class="text-neutral-700 dark:text-neutral-300 text-sm">
+        Every RPMS application owns a short uppercase namespace prefix.
+        This prefix scopes all globals, routines, and FileMan file numbers for that module — preventing collisions across the 70+ applications sharing a single MUMPS environment.
+        It is an early, pragmatic implementation of the same isolation that modern systems achieve with packages, services, or namespaces.
+        When building interoperable health systems, explicit module boundaries and stable identifiers are a foundational pattern worth carrying forward.
+      </p>
+    </section>
+
+    {% include layer-links.html layer="rpms" current="/packages" %}
+  </main>
+</div>

@@ -1,0 +1,801 @@
+{
+  "source": "rpms-ux product-cycle personas and use cases",
+  "source_commit": "ac1fc29",
+  "synced": "2026-11-09",
+  "use_case_count": 18,
+  "use_case_index": [
+    {
+      "id": "registration",
+      "name": "Register a patient"
+    },
+    {
+      "id": "scheduling",
+      "name": "Schedule a visit"
+    },
+    {
+      "id": "benefits",
+      "name": "Check benefits and eligibility"
+    },
+    {
+      "id": "adt",
+      "name": "Admit, transfer, and discharge"
+    },
+    {
+      "id": "triage",
+      "name": "Prepare for the visit and triage"
+    },
+    {
+      "id": "visit",
+      "name": "See the patient and write the note"
+    },
+    {
+      "id": "prescriptions",
+      "name": "Prescribe and dispense medications"
+    },
+    {
+      "id": "lab",
+      "name": "Order labs and act on results"
+    },
+    {
+      "id": "referrals",
+      "name": "Refer and consult"
+    },
+    {
+      "id": "after-visit",
+      "name": "Give an after-visit summary and care plan"
+    },
+    {
+      "id": "messaging",
+      "name": "Message with patients"
+    },
+    {
+      "id": "population",
+      "name": "Manage a panel of patients"
+    },
+    {
+      "id": "coding",
+      "name": "Code diagnoses and procedures"
+    },
+    {
+      "id": "billing",
+      "name": "Bill and collect"
+    },
+    {
+      "id": "prc",
+      "name": "Pay for purchased and referred care"
+    },
+    {
+      "id": "credentialing",
+      "name": "Credential providers"
+    },
+    {
+      "id": "reporting",
+      "name": "Report on workload and quality"
+    },
+    {
+      "id": "behavioral-health",
+      "name": "Keep behavioral health records private"
+    }
+  ],
+  "roles": [
+    {
+      "id": "front_desk_clerk",
+      "role": "Registration / front desk",
+      "surface": "BPRM; the text screens for Patient Registration",
+      "responsibilities": [
+        "finds or registers the patient",
+        "keeps demographics, tribal enrollment and eligibility current",
+        "checks the patient in"
+      ],
+      "goals": [
+        "no duplicate charts",
+        "eligibility right before the visit, so the visit can be billed"
+      ],
+      "context": "at the window with the patient in front of them, under time pressure; the first person to touch every visit.",
+      "use_cases": [
+        "registration",
+        "scheduling"
+      ]
+    },
+    {
+      "id": "registration_supervisor",
+      "role": "Registration supervisor / patient registration manager",
+      "surface": "BPRM; the text screens for Patient Registration",
+      "responsibilities": [
+        "corrects what the front desk cannot: chart numbers and dispositions, legal name changes on proof, deaths",
+        "runs the registration reports",
+        "maintains the site's registration tables"
+      ],
+      "goals": [
+        "one chart per patient, and every correction to a chart's identity on record with who approved it"
+      ],
+      "context": "off the window, a few times a day on request from the front desk; holds the registration manager key, which the front desk clerk does not.",
+      "use_cases": [
+        "registration"
+      ]
+    },
+    {
+      "id": "scheduler",
+      "role": "Scheduling clerk",
+      "surface": "BPRM; IHS Windows Scheduling; the text screens for Scheduling",
+      "responsibilities": [
+        "books, reschedules and cancels appointments",
+        "manages clinic slots and the wait list"
+      ],
+      "goals": [
+        "fill the clinic's slots",
+        "the patient knows when and where to come"
+      ],
+      "context": "on the phone or at the window; works across many clinics' schedules at once.",
+      "use_cases": [
+        "registration",
+        "scheduling"
+      ]
+    },
+    {
+      "id": "medical_assistant",
+      "role": "Medical assistant",
+      "surface": "VueCentric",
+      "responsibilities": [
+        "rooms the patient",
+        "takes vitals",
+        "records the reason for the visit, allergies and screenings",
+        "starts medication reconciliation"
+      ],
+      "goals": [
+        "the provider walks into a room with the chart ready"
+      ],
+      "context": "in the exam room, a few minutes per patient, on the chart the provider will use next.",
+      "use_cases": [
+        "triage",
+        "visit"
+      ]
+    },
+    {
+      "id": "nurse",
+      "role": "Nurse (RN/LPN)",
+      "surface": "VueCentric; BPRM for ward transfers and the census",
+      "responsibilities": [
+        "triage (acuity, screenings, standing orders)",
+        "patient education",
+        "follows up on results and messages"
+      ],
+      "goals": [
+        "the right patient sees the provider first",
+        "nothing ordered is lost"
+      ],
+      "context": "between rooms and the phone; works the Notifications tab.",
+      "use_cases": [
+        "adt",
+        "triage",
+        "visit",
+        "referrals",
+        "after-visit",
+        "coding"
+      ]
+    },
+    {
+      "id": "provider",
+      "role": "Physician, NP or PA",
+      "surface": "VueCentric",
+      "responsibilities": [
+        "examines the patient, sets the purpose of visit, orders, prescribes, refers, writes and signs the note"
+      ],
+      "goals": [
+        "a signed note and a codeable visit by the end of the day, with as few clicks as possible"
+      ],
+      "context": "the Cover Sheet to Notes path in VueCentric, in the room or right after.",
+      "use_cases": [
+        "triage",
+        "visit",
+        "prescriptions",
+        "lab",
+        "referrals",
+        "after-visit",
+        "coding",
+        "credentialing",
+        "behavioral-health"
+      ]
+    },
+    {
+      "id": "coder",
+      "role": "Coder / data entry",
+      "surface": "VueCentric; the text screens for visit data entry",
+      "responsibilities": [
+        "reviews signed visits",
+        "assigns or corrects E&M, CPT and ICD codes",
+        "clears the visit for billing"
+      ],
+      "goals": [
+        "every visit coded correctly, and before the billing deadline"
+      ],
+      "context": "works a queue of signed visits, a day or more after the visit.",
+      "use_cases": [
+        "coding"
+      ]
+    },
+    {
+      "id": "billing_technician",
+      "role": "Billing technician",
+      "surface": "The text screens for Third Party Billing and Accounts Receivable",
+      "responsibilities": [
+        "reviews claims generated from coded visits",
+        "approves and exports them",
+        "posts payments"
+      ],
+      "goals": [
+        "clean claims to Medicare and Medicaid first time",
+        "denials worked"
+      ],
+      "context": "the text screens for Third Party Billing and Accounts Receivable; never sees VueCentric.",
+      "use_cases": [
+        "billing"
+      ]
+    },
+    {
+      "id": "site_manager",
+      "role": "Clinical / quality manager",
+      "surface": "VueCentric's Reports tab; the text screens for visit reports and the Clinical Reporting System",
+      "responsibilities": [
+        "runs clinical and operational reports",
+        "tracks GPRA measures",
+        "answers to the area office"
+      ],
+      "goals": [
+        "numbers that match what happened in the clinic"
+      ],
+      "context": "periodic, report-driven; reads output more than enters data.",
+      "use_cases": [
+        "reporting"
+      ]
+    },
+    {
+      "id": "care_manager",
+      "role": "Care / case manager (nurse case manager, public health nurse)",
+      "surface": "iCare",
+      "responsibilities": [
+        "keeps lists (panels) of the patients they manage, by provider, condition or criteria",
+        "works the flags on those patients (abnormal labs, ER visits, admissions)",
+        "tracks the care-management events each patient is due",
+        "keeps the disease registers current",
+        "reviews their patients' national measures"
+      ],
+      "goals": [
+        "no patient on their list falls through: every flag worked, every due event done, every gap in the measures closed"
+      ],
+      "context": "population-first, not visit-first; works across many patients at once, from a list, often between clinics and with a second case manager sharing the same list.",
+      "use_cases": [
+        "population",
+        "reporting"
+      ]
+    },
+    {
+      "id": "credentialing_coordinator",
+      "role": "Medical staff office",
+      "surface": "The text screens for user setup and Staff Credentials",
+      "responsibilities": [
+        "sets up providers and staff as RPMS users with the right person class, keys, signature and credentials",
+        "tracks licence expiry"
+      ],
+      "goals": [
+        "no provider sees patients before they are credentialed",
+        "no one keeps access after they leave"
+      ],
+      "context": "occasional, high-stakes; the text screens only.",
+      "use_cases": [
+        "credentialing"
+      ]
+    },
+    {
+      "id": "pharmacist",
+      "role": "Pharmacist",
+      "surface": "The text screens for Outpatient Pharmacy",
+      "responsibilities": [
+        "verifies and dispenses prescriptions from provider orders",
+        "counsels the patient"
+      ],
+      "goals": [
+        "safe, fast dispensing"
+      ],
+      "context": "",
+      "use_cases": [
+        "prescriptions"
+      ]
+    },
+    {
+      "id": "lab_technician",
+      "role": "Laboratory technician",
+      "surface": "The text screens for Lab",
+      "responsibilities": [
+        "accessions orders, collects specimens, files results"
+      ],
+      "goals": [
+        "results back on the chart quickly and to the right patient"
+      ],
+      "context": "",
+      "use_cases": [
+        "lab"
+      ]
+    },
+    {
+      "id": "prc_clerk",
+      "role": "Purchased/Referred Care clerk",
+      "surface": "The text screens for Purchased/Referred Care and referral tracking",
+      "responsibilities": [
+        "authorises and tracks Purchased/Referred Care",
+        "tracks referrals out of the clinic"
+      ],
+      "goals": [
+        "referrals authorised within the rules and paid"
+      ],
+      "context": "",
+      "use_cases": [
+        "referrals",
+        "prc"
+      ]
+    },
+    {
+      "id": "admissions_clerk",
+      "role": "Admissions / ADT clerk",
+      "surface": "BPRM; the text screens for admissions",
+      "responsibilities": [
+        "admits, transfers and discharges inpatients",
+        "corrects movements entered in error"
+      ],
+      "goals": [
+        "the record says who is in which bed right now",
+        "every stay has one admission and one discharge"
+      ],
+      "context": "Holds an ADT key that allows moving a patient; a supervisor also maintains wards and beds.",
+      "use_cases": [
+        "adt"
+      ]
+    },
+    {
+      "id": "him_technician",
+      "role": "Health information (medical records) technician",
+      "surface": "BPRM; the text screens for incomplete charts",
+      "responsibilities": [
+        "tracks each discharged chart's deficiencies by provider until the chart is complete"
+      ],
+      "goals": [
+        "no stay waits on a signature to be coded and billed"
+      ],
+      "context": "Works a list of incomplete charts after discharge; holds the incomplete-chart key and cannot move patients.",
+      "use_cases": [
+        "registration",
+        "adt",
+        "behavioral-health"
+      ]
+    },
+    {
+      "id": "benefits_coordinator",
+      "role": "Patient benefits coordinator",
+      "surface": "BPRM; the text screens for Patient Registration",
+      "responsibilities": [
+        "records every kind of coverage a patient has, the Medicare Secondary Payer survey and the order payers are billed in",
+        "helps uninsured patients apply, and tracks each application as a case"
+      ],
+      "goals": [
+        "every visit has a payer",
+        "no patient who could be covered is left uninsured"
+      ],
+      "context": "Away from the window, by appointment or by referral from the front desk; works one patient's file in depth.",
+      "use_cases": [
+        "benefits"
+      ]
+    },
+    {
+      "id": "bh_provider",
+      "role": "Behavioral health provider (psychiatrist, psychologist, social worker, counselor)",
+      "surface": "VueCentric; the Behavioral Health System",
+      "responsibilities": [
+        "sees patients for behavioral health and substance use care",
+        "writes and signs the notes of those visits"
+      ],
+      "goals": [
+        "what the patient tells them is read only by the people the patient's care and the law allow (42 CFR Part 2 for substance use records)"
+      ],
+      "context": "Works the same chart as the rest of the clinic, but their notes sit under titles whose business rules name only the behavioral health user classes; a user who is not in one sees that the note exists, not what it says.",
+      "use_cases": [
+        "behavioral-health"
+      ]
+    },
+    {
+      "id": "patient",
+      "role": "The patient",
+      "surface": "The clinic, a printout, and the patient portal",
+      "responsibilities": [
+        "comes to the visit",
+        "follows the care plan"
+      ],
+      "goals": [
+        "understands what happened and what to do next",
+        "can reach the clinic"
+      ],
+      "context": "gets the after-visit summary on paper today.",
+      "use_cases": [
+        "after-visit",
+        "messaging"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "name": "At the front desk",
+      "blurb": "Getting the patient in the door, on the schedule, and covered.",
+      "use_cases": [
+        {
+          "id": "registration",
+          "name": "Register a patient",
+          "who": [
+            "front_desk_clerk",
+            "registration_supervisor",
+            "scheduler",
+            "him_technician"
+          ],
+          "story_count": 31,
+          "stories": [
+            {
+              "persona": "front_desk_clerk",
+              "text": "As a front desk clerk, I want to search for a patient by name, date of birth, chart number or SSN, so that I don't register someone who already has a chart."
+            },
+            {
+              "persona": "front_desk_clerk",
+              "text": "As a front desk clerk, I want to add a new patient with demographics, tribe and community, so that the patient has a chart and a health record number at this facility."
+            }
+          ]
+        },
+        {
+          "id": "scheduling",
+          "name": "Schedule a visit",
+          "who": [
+            "front_desk_clerk",
+            "scheduler"
+          ],
+          "story_count": 13,
+          "stories": [
+            {
+              "persona": "scheduler",
+              "text": "As a scheduler, I want to find an open slot in a clinic and book the patient into it, so that the patient has a time and the clinic's day is planned."
+            },
+            {
+              "persona": "scheduler",
+              "text": "As a scheduler, I want to cancel or move an appointment with a reason, so that the slot is freed and the clinic knows why."
+            }
+          ]
+        },
+        {
+          "id": "benefits",
+          "name": "Check benefits and eligibility",
+          "who": [
+            "benefits_coordinator"
+          ],
+          "story_count": 10,
+          "stories": [
+            {
+              "persona": "benefits_coordinator",
+              "text": "As a benefits coordinator, I want one list of everything a patient is covered by, with its dates and the order it is billed in, so that I can see what is missing or expired before the visit."
+            },
+            {
+              "persona": "benefits_coordinator",
+              "text": "As a benefits coordinator, I want to record a patient's Medicare or Railroad Retirement entitlement, with each part's dates, and their Part D plan, so that Medicare is billed for the parts the patient has on the visit date."
+            }
+          ]
+        },
+        {
+          "id": "adt",
+          "name": "Admit, transfer, and discharge",
+          "who": [
+            "nurse",
+            "admissions_clerk",
+            "him_technician"
+          ],
+          "story_count": 6,
+          "stories": [
+            {
+              "persona": "admissions_clerk",
+              "text": "As an admissions clerk, I want to admit a registered patient to a ward, so that the stay exists in RPMS and the ward knows the patient is theirs."
+            },
+            {
+              "persona": "nurse",
+              "text": "As a nurse on the ward, I want to record that a patient changed ward, bed, treating specialty or provider, so that the record says where the patient is and who is responsible for them."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "During the visit",
+      "blurb": "Seeing the patient, charting, ordering, and sending them home with a plan.",
+      "use_cases": [
+        {
+          "id": "triage",
+          "name": "Prepare for the visit and triage",
+          "who": [
+            "medical_assistant",
+            "nurse",
+            "provider"
+          ],
+          "story_count": 13,
+          "stories": [
+            {
+              "persona": "medical_assistant",
+              "text": "As a medical assistant, I want to sign on to the EHR with my access and verify codes, so that I work as myself, at my division, with my permissions."
+            },
+            {
+              "persona": "nurse",
+              "text": "As a nurse, I want to land on my notifications when I sign on, so that results, unsigned orders and messages are handled before new work."
+            }
+          ]
+        },
+        {
+          "id": "visit",
+          "name": "See the patient and write the note",
+          "who": [
+            "medical_assistant",
+            "nurse",
+            "provider"
+          ],
+          "story_count": 16,
+          "stories": [
+            {
+              "persona": "provider",
+              "text": "As a provider, I want the Cover Sheet to summarise the patient's problems, medications, allergies, recent vitals and appointments, so that I am oriented before I walk into the room."
+            },
+            {
+              "persona": "provider",
+              "text": "As a provider, I want to select today's visit (or create one for a walk-in), so that everything I chart lands on the right encounter."
+            }
+          ]
+        },
+        {
+          "id": "prescriptions",
+          "name": "Prescribe and dispense medications",
+          "who": [
+            "provider",
+            "pharmacist"
+          ],
+          "story_count": 2,
+          "stories": [
+            {
+              "persona": "provider",
+              "text": "As a provider, I want to prescribe a medication that the pharmacy verifies and dispenses, so that the patient leaves with it."
+            },
+            {
+              "persona": "pharmacist",
+              "text": "As a pharmacist, I want to verify a pending outpatient order and dispense it, so that the patient gets the right drug with a label."
+            }
+          ]
+        },
+        {
+          "id": "lab",
+          "name": "Order labs and act on results",
+          "who": [
+            "provider",
+            "lab_technician"
+          ],
+          "story_count": 3,
+          "stories": [
+            {
+              "persona": "provider",
+              "text": "As a provider, I want to order a lab test and be notified when it is resulted, so that I act on it."
+            },
+            {
+              "persona": "lab_technician",
+              "text": "As a lab technician, I want to accession an ordered test, collect the specimen and verify its result, so that the result reaches the ordering provider."
+            }
+          ]
+        },
+        {
+          "id": "referrals",
+          "name": "Refer and consult",
+          "who": [
+            "nurse",
+            "provider",
+            "prc_clerk"
+          ],
+          "story_count": 3,
+          "stories": [
+            {
+              "persona": "provider",
+              "text": "As a provider, I want to send a consult or referral and see its result, so that the loop is closed."
+            },
+            {
+              "persona": "prc_clerk",
+              "text": "As a PRC clerk, I want to record a referral to an outside provider, so that it can be tracked and authorised for payment."
+            }
+          ]
+        },
+        {
+          "id": "after-visit",
+          "name": "Give an after-visit summary and care plan",
+          "who": [
+            "nurse",
+            "provider",
+            "patient"
+          ],
+          "story_count": 4,
+          "stories": [
+            {
+              "persona": "provider",
+              "text": "As a provider, I want to print a summary of today's visit (diagnoses, medications, orders, instructions, next appointment), so that the patient leaves knowing what to do."
+            },
+            {
+              "persona": "nurse",
+              "text": "As a nurse, I want to record the education given and the instructions for the patient, so that they appear on the summary and count toward measures."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Between visits",
+      "blurb": "Staying in touch with patients and looking after a whole panel.",
+      "use_cases": [
+        {
+          "id": "messaging",
+          "name": "Message with patients",
+          "who": [
+            "patient"
+          ],
+          "story_count": 2,
+          "stories": [
+            {
+              "persona": "nurse",
+              "text": "As a nurse, I want to receive and answer patient messages from the portal, so that the patient reaches the clinic without a phone call."
+            },
+            {
+              "persona": "patient",
+              "text": "As a patient, I want to send my clinic a message from the portal, so that I can ask a question without calling."
+            }
+          ]
+        },
+        {
+          "id": "population",
+          "name": "Manage a panel of patients",
+          "who": [
+            "care_manager"
+          ],
+          "story_count": 8,
+          "stories": [
+            {
+              "persona": "care_manager",
+              "text": "As a care manager, I want a panel of the patients scheduled today for two providers in my clinic, so that I can prepare for each of them before they arrive."
+            },
+            {
+              "persona": "care_manager",
+              "text": "As a care manager, I want a panel of my patients whose latest measurement meets a criterion, so that I can offer them the service it calls for."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Coding and paying for care",
+      "blurb": "Turning a visit into a clean claim, and paying for care bought outside.",
+      "use_cases": [
+        {
+          "id": "coding",
+          "name": "Code diagnoses and procedures",
+          "who": [
+            "nurse",
+            "provider",
+            "coder"
+          ],
+          "story_count": 7,
+          "stories": [
+            {
+              "persona": "provider",
+              "text": "As a provider, I want to set the E&M level and confirm the POVs and procedures before I finish, so that the visit can be billed without a coder's rework."
+            },
+            {
+              "persona": "coder",
+              "text": "As a coder, I want a queue of signed visits with their codes, and to correct a code with the provider's note in view, so that what is billed matches what was documented."
+            }
+          ]
+        },
+        {
+          "id": "billing",
+          "name": "Bill and collect",
+          "who": [
+            "billing_technician"
+          ],
+          "story_count": 4,
+          "stories": [
+            {
+              "persona": "billing_technician",
+              "text": "As a billing technician, I want every coded visit for a Medicare or Medicaid patient to appear as a claim, so that no billable visit is missed."
+            },
+            {
+              "persona": "billing_technician",
+              "text": "As a billing technician, I want to review a claim's errors and approve it, so that only clean claims go out."
+            }
+          ]
+        },
+        {
+          "id": "prc",
+          "name": "Pay for purchased and referred care",
+          "who": [
+            "prc_clerk"
+          ],
+          "story_count": 2,
+          "stories": [
+            {
+              "persona": "prc_clerk",
+              "text": "As a PRC clerk, I want to decide a referral's PRC eligibility and issue a purchase order, so that outside care is paid within the rules."
+            },
+            {
+              "persona": "prc_clerk",
+              "text": "As a PRC clerk, I want to issue a purchase order for an approved referral, so that the outside provider is paid."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Running the clinic",
+      "blurb": "Credentialing staff, reporting on care, and protecting sensitive records.",
+      "use_cases": [
+        {
+          "id": "credentialing",
+          "name": "Credential providers",
+          "who": [
+            "provider",
+            "credentialing_coordinator"
+          ],
+          "story_count": 4,
+          "stories": [
+            {
+              "persona": "credentialing_coordinator",
+              "text": "As a credentialing coordinator, I want to create a provider's RPMS user with person class, NPI, keys and an electronic signature, so that they can sign on, order and sign notes."
+            },
+            {
+              "persona": "credentialing_coordinator",
+              "text": "As a credentialing coordinator, I want to record each provider's licences, DEA and their expiry dates, so that I am warned before a credential lapses."
+            }
+          ]
+        },
+        {
+          "id": "reporting",
+          "name": "Report on workload and quality",
+          "who": [
+            "site_manager",
+            "care_manager"
+          ],
+          "story_count": 5,
+          "stories": [
+            {
+              "persona": "site_manager",
+              "text": "As a site manager, I want a count of visits by clinic and provider for a date range, so that I know the clinic's workload."
+            },
+            {
+              "persona": "site_manager",
+              "text": "As a site manager, I want a list of visits with unsigned notes or no POV, so that they are finished before the billing deadline."
+            }
+          ]
+        },
+        {
+          "id": "behavioral-health",
+          "name": "Keep behavioral health records private",
+          "who": [
+            "provider",
+            "him_technician",
+            "bh_provider"
+          ],
+          "story_count": 3,
+          "stories": [
+            {
+              "persona": "bh_provider",
+              "text": "As a behavioral health provider, I want to write and sign my note under a behavioral health title, so that only the clinicians allowed to read it can read it."
+            },
+            {
+              "persona": "provider",
+              "text": "As a provider who is not a behavioral health clinician, I want to see that the patient has a behavioral health note without being shown what it says, so that I know the patient is in behavioral health care, and their privacy holds."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,16 +1,22 @@
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-# baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://openrpms.org"
 baseurl: ""
 
 title: "OpenRPMS"
 
-description: "Open-source documentation and reference for the Indian Health Service (IHS) Resource and Patient Management System (RPMS) and Electronic Health Record (EHR) — clinical workflows, domain model, and architecture for open healthcare."
+description: "RPMS, built in the open: the people who use it, a working server built from the public FOIA files and the RPCs it answers, and the applications built on it."
+
+# Header icon and footer. The organization, where the work lives.
+github_url: "https://github.com/openrpms"
 
 author:
   name: "OpenRPMS contributors"
   url: "https://openrpms.org"
 
-keywords: "open source healthcare, Indian Health Service, IHS, RPMS, EHR, Electronic Health Record, Resource and Patient Management System, clinical workflows, open healthcare, tribal health"
+keywords: "OpenRPMS, open source healthcare, Indian Health Service, IHS, RPMS, EHR, Electronic Health Record, Resource and Patient Management System, clinical workflows, open healthcare, tribal health"
+
+# The companion that keeps the full personas, user stories and journeys (rpms-ux).
+# Leave empty until it is public; once set, /users and the workflow pages link to it.
+companion_url: ""
 
 permalink: /blog/:title/
 
@@ -40,3 +46,10 @@ exclude:
   - node_modules
   - Gemfile
   - Gemfile.lock
+  - PLAN.md
+  - STRATEGY.md
+  - DESIGN_PROMPT.md
+  - DOMAIN_DDD_summary.md
+  - WORKFLOW_GUIDANCE.md
+  - product-cycle
+  - scripts

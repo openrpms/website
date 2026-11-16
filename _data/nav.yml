@@ -1,0 +1,96 @@
+# The site is three layers, three perspectives on RPMS:
+#   1. Users: the people who work in it, and what they need (informed by rpms-ux).
+#   2. RPMS: the data and core logic, built from the FOIA files, and the RPCs it answers. The core of OpenRPMS.
+#   3. Applications: the interfaces and views people work in, built on those RPCs.
+# The main nav is one link per layer, plus the demo.
+# `match` lists URL prefixes that count as being in that section (for the current-page marker).
+
+main:
+  - label: Users
+    url: /users
+    match: [/users, /workflows, /clinical-workflows, /administrative-workflows]
+  - label: RPMS
+    url: /rpms
+    match: [/rpms, /build, /install, /rpcs, /architecture, /domain-model, /security, /packages, /implementation-notes]
+  - label: Applications
+    url: /applications
+    match: [/applications]
+  - label: Try it
+    url: /demo
+    match: [/demo]
+
+footer:
+  - label: About RPMS
+    url: /about-rpms
+  - label: Glossary
+    url: /glossary
+  - label: Packages
+    url: /packages
+  - label: Implementation Notes
+    url: /implementation-notes
+  - label: EHR Site Checklist
+    url: /ehr-site-tracking
+  - label: EHR Site Survey
+    url: /ehr-site-survey
+  - label: Blog
+    url: /blog
+  - label: Licensing
+    url: /licensing
+  - label: Contribute
+    url: https://github.com/openrpms
+    external: true
+  - label: IHS RPMS
+    url: https://www.ihs.gov/rpms/
+    external: true
+
+# The pages in each layer, in reading order. _includes/layer-links.html renders one layer's
+# pages at the foot of each page in it, so they link to each other.
+layers:
+  users:
+    title: "Users: who works in RPMS, and what they need"
+    pages:
+      - label: Users & use cases
+        url: /users
+        blurb: The roles, and what each one needs to do.
+      - label: Workflows
+        url: /workflows
+        blurb: How the work moves, as patterns.
+  rpms:
+    title: "RPMS: the data and core logic"
+    pages:
+      - label: Overview
+        url: /rpms
+        blurb: FOIA files in, a working server out.
+      - label: How a release is built
+        url: /build
+        blurb: What goes in, and what is missing.
+      - label: Install
+        url: /install
+        blurb: Run it on YottaDB, or on IRIS with your own license.
+      - label: RPCs
+        url: /rpcs
+        blurb: The requests every application calls.
+      - label: Domain Model
+        url: /domain-model
+        blurb: The core records and how they relate.
+      - label: Architecture
+        url: /architecture
+        blurb: How the server is put together.
+      - label: Security
+        url: /security
+        blurb: Who can do what, and how it is recorded.
+      - label: Packages
+        url: /packages
+        blurb: Every package, by area.
+      - label: Implementation notes
+        url: /implementation-notes
+        blurb: What standing a system up actually took.
+  applications:
+    title: "Applications: the interfaces and views"
+    pages:
+      - label: Applications
+        url: /applications
+        blurb: The chart, the panel, the front desk, and the web.
+      - label: Try it
+        url: /demo
+        blurb: A clinic of made-up patients, in the browser.

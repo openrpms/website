@@ -1,0 +1,205 @@
+---
+layout: default
+title: "Users & use cases"
+description: "Who works in RPMS, and what they need it to do: the clinic roles, and the use cases they share, in their own words."
+---
+
+{% assign users = site.data.users %}
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12 max-w-3xl">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Users &amp; use cases
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS is used by everyone in a clinic, from the front desk to the pharmacy to the billing office.
+        This page names those people, and what each of them needs the system to do.
+      </p>
+      <p class="mt-3 text-neutral-600 dark:text-neutral-400">
+        Each role is a job at a clinic, not a single person.
+        At a small site one person often does several.
+        The stories are written the way the work is described: as a role, I want something, so that something good happens.
+      </p>
+      <nav
+        class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold"
+        aria-label="On this page"
+      >
+        <a
+          href="#use-cases"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >What they need to do</a>
+        <a
+          href="#roles"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >Who uses RPMS</a>
+      </nav>
+    </div>
+
+    <section
+      id="use-cases"
+      class="scroll-mt-6"
+    >
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+        What they need to do
+      </h2>
+      <p class="mb-8 text-neutral-600 dark:text-neutral-400">
+        {{ users.use_case_count }} use cases in {{ users.groups | size }} areas, in the order a clinic's day runs.
+      </p>
+
+      <div class="space-y-12">
+        {% for group in users.groups %}
+        <div>
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-white">
+            {{ group.name }}
+          </h3>
+          <p class="mt-1 mb-4 text-sm text-neutral-600 dark:text-neutral-400">
+            {{ group.blurb }}
+          </p>
+          <div class="grid gap-4 md:grid-cols-2">
+            {% for uc in group.use_cases %}
+            <article
+              id="{{ uc.id }}"
+              class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 scroll-mt-6"
+            >
+              <h4 class="font-semibold text-neutral-900 dark:text-white">
+                {{ uc.name }}
+              </h4>
+              <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                {% for pid in uc.who %}
+                {% assign role = users.roles | where: "id", pid | first %}
+                <a
+                  href="#role-{{ pid }}"
+                  class="hover:underline"
+                >{{ role.role }}</a>{% unless forloop.last %} &middot;{% endunless %}
+                {% endfor %}
+              </p>
+              <div class="mt-3 space-y-2">
+                {% for story in uc.stories %}
+                <blockquote class="border-l-2 border-neutral-300 dark:border-neutral-700 pl-3 text-sm text-neutral-700 dark:text-neutral-300">
+                  {{ story.text }}
+                </blockquote>
+                {% endfor %}
+              </div>
+              {% if uc.story_count > uc.stories.size %}
+              <p class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+                {% if site.companion_url != "" %}
+                <a
+                  href="{{ site.companion_url }}"
+                  class="underline hover:text-neutral-900 dark:hover:text-white"
+                >{{ uc.story_count | minus: uc.stories.size }} more stories in the full set</a>.
+                {% else %}
+                {{ uc.story_count | minus: uc.stories.size }} more stories in the full set.
+                {% endif %}
+              </p>
+              {% endif %}
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section
+      id="roles"
+      class="mt-16 scroll-mt-6"
+    >
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-2">
+        Who uses RPMS
+      </h2>
+      <p class="mb-8 text-neutral-600 dark:text-neutral-400">
+        {{ users.roles | size }} roles, with what each one is responsible for and what a good day looks like.
+      </p>
+
+      <div class="grid gap-4 md:grid-cols-2">
+        {% for role in users.roles %}
+        <article
+          id="role-{{ role.id }}"
+          class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 scroll-mt-6"
+        >
+          <h3 class="font-semibold text-neutral-900 dark:text-white">
+            {{ role.role }}
+          </h3>
+          {% if role.context %}
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            {{ role.context | capitalize }}
+          </p>
+          {% endif %}
+          <dl class="mt-3 space-y-2 text-sm">
+            {% if role.responsibilities.size > 0 %}
+            <div>
+              <dt class="font-medium text-neutral-900 dark:text-white">
+                Responsible for
+              </dt>
+              <dd class="text-neutral-700 dark:text-neutral-300">
+                {{ role.responsibilities | join: "; " }}.
+              </dd>
+            </div>
+            {% endif %}
+            {% if role.goals.size > 0 %}
+            <div>
+              <dt class="font-medium text-neutral-900 dark:text-white">
+                Wants
+              </dt>
+              <dd class="text-neutral-700 dark:text-neutral-300">
+                {{ role.goals | join: "; " }}.
+              </dd>
+            </div>
+            {% endif %}
+            {% if role.surface %}
+            <div>
+              <dt class="font-medium text-neutral-900 dark:text-white">
+                Works in
+              </dt>
+              <dd class="text-neutral-700 dark:text-neutral-300">
+                {{ role.surface }}
+              </dd>
+            </div>
+            {% endif %}
+          </dl>
+          <p class="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+            {% for slug in role.use_cases %}
+            {% assign uc = users.use_case_index | where: "id", slug | first %}
+            <a
+              href="#{{ slug }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >{{ uc.name }}</a>{% unless forloop.last %} &middot;{% endunless %}
+            {% endfor %}
+          </p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <div class="mt-16 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        These come from a companion project that keeps the full set of personas, user stories, and step-by-step journeys, with the screen a person sees at each step.
+        {% if site.companion_url != "" %}
+        Read the full set in
+        <a
+          href="{{ site.companion_url }}"
+          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+        >the companion</a>.
+        {% else %}
+        That companion is being prepared for publication, and this page will link to it.
+        {% endif %}
+        The patterns behind the work are on
+        <a
+          href="{{ "/workflows" | relative_url }}"
+          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+        >Workflows</a>.
+        Unfamiliar terms are in the
+        <a
+          href="{{ "/glossary" | relative_url }}"
+          class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+        >Glossary</a>.
+      </p>
+    </div>
+
+    {% include layer-links.html layer="users" current="/users" %}
+  </main>
+</div>

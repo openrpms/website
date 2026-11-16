@@ -1,0 +1,179 @@
+---
+layout: default
+title: "RPCs"
+description: "The requests RPMS answers: what an RPC is, how applications reach them, and how many a release registers."
+---
+
+{% assign r = site.data.rpcs %}
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        RPCs
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        An RPC, or remote procedure call, is a named request an application sends to the RPMS server.
+        "Get this patient's allergies."
+        "Sign this note."
+        "Book this slot."
+        The server runs the matching program and sends back the answer.
+      </p>
+      <p class="mt-3 text-neutral-600 dark:text-neutral-400">
+        RPCs are where the data and core logic meet the applications people use.
+        The chart, the patient panel, and the web front end all work this way, so a new application that speaks RPCs can work alongside them on the same record.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          How applications reach them
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            An application connects to the server through a
+            <a
+              href="{{ "/glossary" | relative_url }}#broker"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >broker</a>,
+            signs on as a user, and then sends RPCs.
+            The server checks that the user is allowed to call each one.
+            RPMS has three brokers:
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>
+              <strong class="text-neutral-900 dark:text-white">XWB</strong>,
+              the standard broker from VistA.
+            </li>
+            <li>
+              <strong class="text-neutral-900 dark:text-white">CIA</strong>,
+              which VueCentric uses.
+            </li>
+            <li>
+              <strong class="text-neutral-900 dark:text-white">BMX</strong>,
+              which the .NET programs, such as iCare, use.
+            </li>
+          </ul>
+          <p>
+            The rpms-rpc library wraps those connections and the most-used RPCs in plain methods, with examples that sign on and ask a running server for something real.
+            The web front end on
+            <a
+              href="{{ "/applications" | relative_url }}#lakeraven-ehr"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Applications</a>
+            is built on it.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          How many there are
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <p class="text-3xl font-bold text-neutral-900 dark:text-white">
+              {{ r.fmt.rpcs }}
+            </p>
+            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+              RPCs registered on the server
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <p class="text-3xl font-bold text-neutral-900 dark:text-white">
+              {{ r.fmt.client_callable }}
+            </p>
+            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+              an application can call
+            </p>
+          </div>
+          <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+            <p class="text-3xl font-bold text-neutral-900 dark:text-white">
+              {{ r.package_count }}
+            </p>
+            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+              packages that answer them
+            </p>
+          </div>
+        </div>
+        <div class="mt-6 space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            The rest are registered but cannot be called as they stand.
+            {{ r.not_callable.no_program }} point at a program that is not in the public files, or not at a program at all.
+            {{ r.not_callable.no_context }} are not offered to any application's sign-on.
+            {{ r.not_callable.other }} have other limits, noted in the catalog.
+            <a
+              href="{{ "/build" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >How a release is built</a>
+            explains why some programs are missing.
+          </p>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400">
+            Counts are for the BCER {{ r.bcer }} build of {{ r.build_date | date: "%B %-d, %Y" }}, from version {{ r.catalog_release | remove_first: "v" }} of the RPC catalog.
+            A later build publishes its own counts.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          The packages that answer the most
+        </h2>
+        <div class="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+          <table class="w-full text-sm">
+            <thead class="bg-neutral-50 dark:bg-neutral-900 text-left">
+              <tr>
+                <th class="px-4 py-2 font-semibold text-neutral-900 dark:text-white">
+                  Package
+                </th>
+                <th class="px-4 py-2 font-semibold text-neutral-900 dark:text-white">
+                  What it serves
+                </th>
+                <th class="px-4 py-2 font-semibold text-neutral-900 dark:text-white text-right">
+                  RPCs
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+              {% for p in r.top %}
+              <tr>
+                <td class="px-4 py-2 text-neutral-900 dark:text-white">
+                  {{ p.name }}
+                </td>
+                <td class="px-4 py-2 text-neutral-600 dark:text-neutral-400">
+                  {{ p.note }}
+                </td>
+                <td class="px-4 py-2 text-right tabular-nums text-neutral-700 dark:text-neutral-300">
+                  {{ p.rpcs_fmt }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-sm text-neutral-500 dark:text-neutral-400">
+          {{ r.fmt.unassigned }} more RPCs belong to no registered package.
+          The full catalog lists every RPC, its arguments, and its reply.
+          {% if site.companion_url != "" %}
+          It is in
+          <a
+            href="{{ site.companion_url }}"
+            class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+          >the companion</a>.
+          {% else %}
+          It is being prepared for publication alongside the companion, and this page will link to it.
+          {% endif %}
+        </p>
+      </section>
+
+    </div>
+
+    {% include layer-links.html layer="rpms" current="/rpcs" %}
+
+  </main>
+</div>

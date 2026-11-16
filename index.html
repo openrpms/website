@@ -172,99 +172,116 @@ description: "RPMS, built in the open, starting with the people who use it. Try 
       </div>
     </div>
 
-    <!-- What's here -->
+    <!-- Three layers -->
     <div class="border-t border-neutral-200 dark:border-neutral-800">
       <div class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
         <h2 class="text-sm font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-8">
-          Learn how RPMS works
+          Three layers
         </h2>
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ol class="space-y-6">
 
-          <a
-            href="{{ "/design" | relative_url }}"
-            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
-          >
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
-              People First
-            </h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              Who does the work, what they need, and the processes that get it done, step by step on the screen it happens on.
+          <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6">
+            <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+              1 &middot; Users
             </p>
-          </a>
-
-          <a
-            href="{{ "/domain-model" | relative_url }}"
-            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
-          >
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
-              Domain Model
+            <h3 class="mt-1 text-xl font-bold text-neutral-900 dark:text-white">
+              <a
+                href="{{ "/users" | relative_url }}"
+                class="hover:underline"
+              >The people who use it, and what they need</a>
             </h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              Core healthcare entities — Patient, Encounter, Order, Problem, Result — distilled from decades of operational use.
+            <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+              {{ site.data.users.roles | size }} roles, from the front desk to the pharmacy, and {{ site.data.users.use_case_count }} use cases written in their own words.
+              Everything else on the site serves these.
             </p>
-          </a>
+            <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+              <a
+                href="{{ "/users" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Users &amp; use cases</a>
+              &middot;
+              <a
+                href="{{ "/workflows" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Workflows</a>
+              &middot;
+              <a
+                href="{{ "/design" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >People first</a>
+            </p>
+          </li>
 
-          <a
-            href="{{ "/architecture" | relative_url }}"
-            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
-          >
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
-              System Architecture
+          <li class="rounded-lg border-2 border-neutral-900 dark:border-white p-6">
+            <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+              2 &middot; RPMS &middot; The core
+            </p>
+            <h3 class="mt-1 text-xl font-bold text-neutral-900 dark:text-white">
+              <a
+                href="{{ "/rpms" | relative_url }}"
+                class="hover:underline"
+              >The data and core logic, built from the FOIA files</a>
             </h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              Four-layer model, infrastructure stack, decentralized-by-design federation pattern, and standards governance.
+            <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+              The FOIA files go in, and a working RPMS server comes out, kept at the certified patch level, on IRIS or the open-source YottaDB.
+              It answers {{ site.data.rpcs.fmt.rpcs }} RPCs, the requests every application uses to read and write the record.
             </p>
-          </a>
+            <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+              <a
+                href="{{ "/build" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >How a release is built</a>
+              &middot;
+              <a
+                href="{{ "/install" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Install</a>
+              &middot;
+              <a
+                href="{{ "/rpcs" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >RPCs</a>
+              &middot;
+              <a
+                href="{{ "/packages" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Packages</a>
+              &middot;
+              <a
+                href="{{ "/architecture" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Architecture</a>
+            </p>
+          </li>
 
-          <a
-            href="{{ "/workflows" | relative_url }}"
-            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
-          >
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
-              Clinical Workflows
+          <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-6">
+            <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+              3 &middot; Applications
+            </p>
+            <h3 class="mt-1 text-xl font-bold text-neutral-900 dark:text-white">
+              <a
+                href="{{ "/applications" | relative_url }}"
+                class="hover:underline"
+              >The interfaces and views people work in</a>
             </h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              Pre-visit prep, encounter-at-arrival, cohort query at point of care, and external clinical decision support.
+            <p class="mt-2 text-neutral-700 dark:text-neutral-300">
+              VueCentric for the chart, iCare for the patient panel, Behavioral Health, BPRM for the front desk, and lakeraven-ehr on the web.
+              Each one is a view onto the same record.
             </p>
-          </a>
-
-          <a
-            href="{{ "/workflows" | relative_url }}"
-            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
-          >
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
-              Administrative Workflows
-            </h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              Registration, credentialing, billing, and resource management as first-class domain operations.
+            <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+              <a
+                href="{{ "/applications" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Applications</a>
+              &middot;
+              <a
+                href="{{ "/demo" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Try the demo</a>
             </p>
-          </a>
+          </li>
 
-          <a
-            href="{{ "/security" | relative_url }}"
-            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
-          >
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
-              Security Patterns
-            </h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              Kernel-based access control, audit trails, e-prescribing of controlled substances, and user security auditing.
-            </p>
-          </a>
-
-          <a
-            href="{{ "/applications" | relative_url }}"
-            class="group rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
-          >
-            <h3 class="font-semibold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-neutral-200 mb-2">
-              Application Catalog
-            </h3>
-            <p class="text-sm text-neutral-600 dark:text-neutral-400">
-              All 70+ RPMS modules organized by domain — Clinical, Administrative, Infrastructure — with namespace codes.
-            </p>
-          </a>
-
-        </div>
+        </ol>
       </div>
     </div>
 

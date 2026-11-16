@@ -1,0 +1,250 @@
+---
+layout: default
+title: "About RPMS"
+description: "A plain-language introduction to the Resource and Patient Management System: what it is, who uses it, what is public, and where things stand."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        About RPMS
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        The Resource and Patient Management System is the health information system of the Indian Health Service.
+        This page is a short introduction for anyone new to it.
+        Terms in bold are explained in the
+        <a
+          href="{{ "/glossary" | relative_url }}"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >Glossary</a>.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          What it is
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            RPMS is one system that covers both the clinical and the business side of a health facility.
+            It holds the patient chart, orders, labs, pharmacy, and immunizations.
+            It also handles registration, scheduling, billing, and the reports a facility owes.
+          </p>
+          <p>
+            IHS describes it as more than 50 software applications that work together.
+            Each facility runs its own copy, so a small clinic and a large hospital can each work on their own terms.
+            Data is sent upward on a schedule for national reporting.
+          </p>
+          <p>
+            IHS has built and maintained RPMS for more than 40 years, and it continues to release updates.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Who uses it
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            RPMS serves American Indian and Alaska Native patients.
+            It runs in facilities operated by IHS, by tribes, and by urban Indian health programs.
+            Providers, nurses, pharmacists, registration clerks, coders, and billing staff all work in it every day.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          How it fits together
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            RPMS has two halves.
+            The server holds the data and the programs that act on it.
+            Staff reach the server through programs on their own computers.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>
+              <strong class="text-neutral-900 dark:text-white">The server</strong>
+              is written in
+              <strong class="text-neutral-900 dark:text-white">M</strong>
+              (also called MUMPS) and stores its records with
+              <strong class="text-neutral-900 dark:text-white">FileMan</strong>.
+              It runs on a database engine: InterSystems
+              <strong class="text-neutral-900 dark:text-white">IRIS</strong>
+              in IHS facilities, or the open-source
+              <strong class="text-neutral-900 dark:text-white">YottaDB</strong>.
+            </li>
+            <li>
+              <strong class="text-neutral-900 dark:text-white">The programs staff open</strong>
+              include
+              <strong class="text-neutral-900 dark:text-white">VueCentric</strong>
+              for the chart,
+              <strong class="text-neutral-900 dark:text-white">iCare</strong>
+              for a panel of patients, and
+              <strong class="text-neutral-900 dark:text-white">BPRM</strong>
+              for the front desk.
+              Many staff also use the original text screens directly.
+            </li>
+          </ul>
+          <p>
+            <a
+              href="{{ "/architecture" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Architecture</a>
+            goes into the layers, and
+            <a
+              href="{{ "/applications" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Applications</a>
+            covers the programs staff open, and
+            <a
+              href="{{ "/packages" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Packages</a>
+            lists the packages on the server.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Its relationship to VistA
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            RPMS and the VA's
+            <strong class="text-neutral-900 dark:text-white">VistA</strong>
+            are close relatives.
+            They share core packages, including FileMan, Kernel, and MailMan, which IHS and VA developers built together.
+            Above that shared base, each system has its own applications for the people it serves.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          What is public
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            RPMS was written by federal employees, so it is in the public domain.
+            IHS publishes packages and patches, and the code has been released through
+            <strong class="text-neutral-900 dark:text-white">FOIA</strong>
+            requests for decades.
+            A few parts are withheld, such as licensed code sets and some controlled-substance reporting.
+          </p>
+          <p>
+            The public files are the pieces of a working system, not a ready-to-run system.
+            The last complete public database is from 2021, and everything since arrives as patches.
+            Some desktop programs also depend on commercial libraries that are not part of the release.
+          </p>
+          <p>
+            <a
+              href="{{ "/licensing" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Licensing</a>
+            covers what is public domain and what is not.
+            <a
+              href="{{ "/build" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >How a release is built</a>
+            covers how the public files become a working system, and what is still missing.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          Where things stand
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            IHS is building a new enterprise electronic health record, called
+            <strong class="text-neutral-900 dark:text-white">PATH EHR</strong>
+            (Patients at the Heart).
+            General Dynamics Information Technology is building it, using Oracle Health technology.
+            The Lawton Service Unit in Oklahoma is the pilot site.
+            IHS's program page lists a September 2026 go-live target for the pilot.
+            Federal, tribal, and urban facilities are to follow in later groups, and IHS has not published dates for those.
+          </p>
+          <p>
+            Until a facility moves, it keeps running RPMS.
+            That makes RPMS worth understanding for years yet, and its decades of design worth carrying forward either way.
+          </p>
+          <p>
+            <a
+              href="https://www.ihs.gov/hit/path-ehr"
+              class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              IHS &mdash; PATH EHR program page &rarr;
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+          What this site does
+        </h2>
+        <div class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <p>
+            OpenRPMS works from what IHS has made public.
+            The FOIA files go in, and working images come out, so anyone can stand up a running RPMS to learn from, test against, or build on.
+          </p>
+          <p>
+            The site looks at RPMS in three layers, each a different perspective on the same system.
+          </p>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>
+              <a
+                href="{{ "/users" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Users</a>:
+              the people who work in RPMS, and what they need it to do.
+            </li>
+            <li>
+              <a
+                href="{{ "/rpms" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >RPMS</a>:
+              the data and core logic, built from the FOIA files, and the RPCs it answers.
+              This is the core of OpenRPMS.
+            </li>
+            <li>
+              <a
+                href="{{ "/applications" | relative_url }}"
+                class="underline hover:text-neutral-900 dark:hover:text-white"
+              >Applications</a>:
+              the interfaces and views people work in, built on those RPCs.
+            </li>
+          </ul>
+        </div>
+        <div class="mt-8 rounded-lg bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">
+            <strong class="text-neutral-900 dark:text-white">Disclaimer:</strong>
+            OpenRPMS is an open source project.
+            It is not affiliated with the Indian Health Service, the Department of Health and Human Services, or the U.S. government.
+            For official information, see
+            <a
+              href="https://www.ihs.gov/rpms/"
+              class="underline hover:text-neutral-700 dark:hover:text-neutral-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >IHS RPMS</a>.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

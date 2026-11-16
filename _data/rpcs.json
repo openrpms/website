@@ -1,0 +1,106 @@
+{
+  "build": "bcer-9.0-20261012-e7923a4-ydb",
+  "bcer": "9.0",
+  "build_date": "2026-10-12",
+  "catalog_release": "v0.4.0",
+  "rpcs": 5557,
+  "client_callable": 4940,
+  "not_callable": {
+    "no_program": 290,
+    "no_context": 226,
+    "other": 101
+  },
+  "package_count": 49,
+  "top": [
+    {
+      "slug": "ihs-clinical-reporting",
+      "name": "IHS Clinical Reporting",
+      "rpcs": 1629,
+      "note": "National performance reports, such as GPRA",
+      "rpcs_fmt": "1,629"
+    },
+    {
+      "slug": "order-entry-results-reporting",
+      "name": "Order Entry Results Reporting",
+      "rpcs": 931,
+      "note": "Orders and results in the chart",
+      "rpcs_fmt": "931"
+    },
+    {
+      "slug": "icare-management-system",
+      "name": "iCare Management System",
+      "rpcs": 443,
+      "note": "iCare, the patient panel",
+      "rpcs_fmt": "443"
+    },
+    {
+      "slug": "bgo-components",
+      "name": "BGO Components",
+      "rpcs": 308,
+      "note": "Parts of the chart: problems, visits, education",
+      "rpcs_fmt": "308"
+    },
+    {
+      "slug": "beh-components",
+      "name": "BEH Components",
+      "rpcs": 243,
+      "note": "The EHR's VueCentric components",
+      "rpcs_fmt": "243"
+    },
+    {
+      "slug": "ihs-behavioral-health",
+      "name": "IHS Behavioral Health",
+      "rpcs": 223,
+      "note": "The Behavioral Health System",
+      "rpcs_fmt": "223"
+    },
+    {
+      "slug": "diabetes-management-system",
+      "name": "Diabetes Management System",
+      "rpcs": 198,
+      "note": "Diabetes registers and care",
+      "rpcs_fmt": "198"
+    },
+    {
+      "slug": "text-integration-utilities",
+      "name": "Text Integration Utilities",
+      "rpcs": 114,
+      "note": "Clinical notes",
+      "rpcs_fmt": "114"
+    },
+    {
+      "slug": "patient-registration-gui",
+      "name": "Patient Registration GUI",
+      "rpcs": 103,
+      "note": "Registration",
+      "rpcs_fmt": "103"
+    },
+    {
+      "slug": "bpc-patient-chart",
+      "name": "BPC Patient Chart",
+      "rpcs": 83,
+      "note": "The patient chart",
+      "rpcs_fmt": "83"
+    },
+    {
+      "slug": "care-management-event-tracking",
+      "name": "Care Management Event Tracking",
+      "rpcs": 81,
+      "note": "Care-management events patients are due",
+      "rpcs_fmt": "81"
+    },
+    {
+      "slug": "ihs-pharmacy-modifications",
+      "name": "IHS Pharmacy Modifications",
+      "rpcs": 72,
+      "note": "Pharmacy",
+      "rpcs_fmt": "72"
+    }
+  ],
+  "unassigned": 328,
+  "fmt": {
+    "rpcs": "5,557",
+    "client_callable": "4,940",
+    "unassigned": "328"
+  }
+}

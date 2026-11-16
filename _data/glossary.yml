@@ -1,0 +1,259 @@
+# Plain-language definitions for terms used across the site.
+# Keep entries alphabetical by term. Each `id` is the anchor: /glossary#<id>.
+# `see` lists ids of related terms.
+
+- id: accession
+  term: Accession
+  definition: >-
+    Logging a lab specimen in when it is collected, and giving it a number, so its result can be matched to the order and the patient.
+
+- id: adt
+  term: ADT
+  definition: >-
+    Admission, discharge, and transfer: recording when a patient is admitted to a ward, moves within the hospital, and goes home.
+
+- id: bcer
+  term: BCER
+  definition: >-
+    The IHS package that carries the version stamp of a certified RPMS electronic health record.
+    BCER 9.0 was certified in November 2025.
+  see: [onc-certification, patch]
+
+- id: bmw
+  term: BMW
+  definition: >-
+    A layer that presents RPMS data as database tables, so programs written for Microsoft .NET can read it with ordinary database queries.
+    BPRM depends on it.
+    It runs only on IRIS.
+  see: [bprm, iris, fileman]
+
+- id: bmx
+  term: BMX
+  definition: >-
+    The IHS broker that .NET desktop programs use to talk to the RPMS server.
+  see: [broker, rpc]
+
+- id: bprm
+  term: BPRM
+  definition: >-
+    The practice management program used at the front desk: registration, scheduling, and billing.
+    It reads RPMS through BMW, so it needs IRIS.
+  see: [bmw, iris]
+
+- id: broker
+  term: Broker
+  definition: >-
+    The connection between a desktop program and the RPMS server.
+    The program sends named requests through it, and the server answers.
+    RPMS has three: XWB, CIA, and BMX.
+  see: [rpc, xwb, cia, bmx]
+
+- id: cia
+  term: CIA broker
+  definition: >-
+    The broker VueCentric uses to talk to the server.
+    It is a different protocol from the standard XWB broker.
+  see: [broker, vuecentric]
+
+- id: cpt
+  term: CPT
+  definition: >-
+    Current Procedural Terminology, the American Medical Association's codes for procedures and services.
+    They are licensed separately, so the public RPMS files leave them out.
+  see: [icd, em]
+
+- id: em
+  term: E&M
+  definition: >-
+    Evaluation and management: the level of a visit, chosen from how complex it was.
+    It sets what the visit is billed at.
+  see: [cpt, pov]
+
+- id: fileman
+  term: FileMan
+  definition: >-
+    The database layer shared by RPMS and VistA.
+    It defines files, fields, and cross-references on top of M's storage, and gives every package one consistent way to read and write records.
+  see: [m, global, vista]
+
+- id: foia
+  term: FOIA
+  definition: >-
+    The Freedom of Information Act, the law that lets anyone request federal records.
+    RPMS code has been released through FOIA requests for decades, and those files are the starting point for OpenRPMS.
+  see: [public-domain]
+
+- id: global
+  term: Global
+  definition: >-
+    M's built-in way of storing data on disk, as a tree of named, numbered entries.
+    FileMan files are kept in globals.
+  see: [m, fileman]
+
+- id: gpra
+  term: GPRA
+  definition: >-
+    The Government Performance and Results Act.
+    IHS reports clinical performance measures under it, and RPMS produces those reports from each facility's data.
+
+- id: icare
+  term: iCare
+  definition: >-
+    The program for working with a panel of patients: who is due for care, who has a condition, and who needs follow-up.
+
+- id: icd
+  term: ICD
+  definition: >-
+    The International Classification of Diseases, the standard codes for diagnoses.
+  see: [pov, cpt]
+
+- id: ihs
+  term: IHS
+  definition: >-
+    The Indian Health Service, the agency in the U.S. Department of Health and Human Services that provides health care to American Indian and Alaska Native people.
+
+- id: iris
+  term: IRIS
+  definition: >-
+    InterSystems IRIS, the commercial database engine IHS uses to run RPMS.
+    It is the successor to InterSystems Caché.
+    It requires a license.
+  see: [m, yottadb]
+
+- id: kernel
+  term: Kernel
+  definition: >-
+    The VA Kernel, the package that controls sign-on, menus, security keys, and devices.
+    Every other package depends on it.
+  see: [vista]
+
+- id: kids
+  term: KIDS
+  definition: >-
+    The Kernel Installation and Distribution System, the format and tool used to package and install RPMS software and patches.
+  see: [patch, kernel]
+
+- id: m
+  term: M (MUMPS)
+  definition: >-
+    The programming language RPMS and VistA are written in.
+    It was created at Massachusetts General Hospital in the 1960s, and the language and its database are one thing.
+  see: [global, routine, iris, yottadb]
+
+- id: mailman
+  term: MailMan
+  definition: >-
+    The internal messaging package shared by RPMS and VistA.
+    Alerts, reminders, and approvals travel through it.
+
+- id: namespace
+  term: Namespace
+  definition: >-
+    A short prefix, such as GMRA or BQI, that marks which package a piece of code or data belongs to.
+    It keeps more than 70 packages from colliding in one system.
+
+- id: onc-certification
+  term: ONC certification
+  definition: >-
+    The federal certification program for electronic health records, run by HHS's Office of the National Coordinator for Health IT.
+    IHS certifies RPMS releases under it.
+  see: [bcer]
+
+- id: patch
+  term: Patch
+  definition: >-
+    An update to a package, published by IHS in KIDS format.
+    Since 2021, the public RPMS files have grown only through patches.
+  see: [kids]
+
+- id: path-ehr
+  term: PATH EHR
+  definition: >-
+    "Patients at the Heart," the new enterprise electronic health record IHS is building with General Dynamics Information Technology and Oracle Health.
+  see: [rpms]
+
+- id: pov
+  term: POV
+  definition: >-
+    Purpose of visit: a diagnosis recorded for a visit.
+    A visit needs one before it can be billed or counted in reports.
+  see: [icd, em]
+
+- id: prc
+  term: PRC
+  definition: >-
+    Purchased/Referred Care, the IHS program that pays for care a patient receives outside IHS and tribal facilities, when it meets the program's rules.
+    It was formerly called Contract Health Services.
+
+- id: public-domain
+  term: Public domain
+  definition: >-
+    Work with no copyright, free for anyone to use, study, and share.
+    Software written by federal employees as part of their jobs is in the public domain.
+  see: [foia]
+
+- id: routine
+  term: Routine
+  definition: >-
+    A program file in M.
+    A package's routines start with its namespace.
+  see: [m, namespace]
+
+- id: rpc
+  term: RPC
+  definition: >-
+    A remote procedure call, a named request a desktop program sends to the server through a broker.
+  see: [broker]
+
+- id: rpms
+  term: RPMS
+  definition: >-
+    The Resource and Patient Management System, the health information system of the Indian Health Service, used in IHS, tribal, and urban Indian health facilities.
+  see: [ihs, vista]
+
+- id: sac
+  term: SAC
+  definition: >-
+    The Standards and Conventions that RPMS packages follow, and the committee that keeps them, so independently written packages work together.
+  see: [namespace]
+
+- id: security-key
+  term: Security key
+  definition: >-
+    A named permission in RPMS.
+    Holding a key lets a user do one specific thing, such as move a patient between wards.
+  see: [kernel]
+
+- id: text-screens
+  term: Text screens
+  definition: >-
+    RPMS's original interface: menus and prompts in a terminal window.
+    Staff often call it roll-and-scroll.
+    Many jobs, such as billing, pharmacy, and lab, are still done there.
+
+- id: vista
+  term: VistA
+  definition: >-
+    The VA's health information system.
+    RPMS shares its core packages, including FileMan, Kernel, and MailMan.
+  see: [fileman, kernel, mailman]
+
+- id: vuecentric
+  term: VueCentric
+  definition: >-
+    The Windows program that presents the RPMS chart.
+    It hosts the parts of the chart, such as problems, medications, and notes, in one window.
+  see: [cia]
+
+- id: xwb
+  term: XWB
+  definition: >-
+    The standard RPC broker from VistA, used by many RPMS desktop programs.
+  see: [broker, rpc]
+
+- id: yottadb
+  term: YottaDB
+  definition: >-
+    An open-source database engine that runs M code, descended from GT.M.
+    With it, RPMS can run without a commercial database license.
+  see: [m, iris]

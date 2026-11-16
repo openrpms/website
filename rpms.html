@@ -1,0 +1,161 @@
+---
+layout: default
+title: "RPMS"
+description: "The core of OpenRPMS: a working RPMS server built from the public FOIA files, the data and core logic it holds, and the RPCs every application calls."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        RPMS: the data and core logic
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        This is the core of OpenRPMS.
+        The FOIA files go in, and a working RPMS server comes out.
+        That server holds the records and the rules, and answers the RPCs every application calls.
+      </p>
+    </div>
+
+    <section>
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">
+        From the public files to a working server
+      </h2>
+      <ol class="space-y-4">
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+            1 &middot; In
+          </p>
+          <h3 class="mt-1 font-semibold text-neutral-900 dark:text-white">
+            The FOIA files
+          </h3>
+          <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+            What IHS has made public: a database copy from 2021, the source code it chose to release, and the patches published since.
+            They are the pieces of a working system, without instructions for putting them back together.
+          </p>
+        </li>
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+            2 &middot; Build
+          </p>
+          <h3 class="mt-1 font-semibold text-neutral-900 dark:text-white">
+            A release, kept at the certified level
+          </h3>
+          <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+            Every input is checksummed, the patches are installed to the certified line, the old site's leftover state is cleared, and checks run before anything is published.
+            The same release runs on InterSystems IRIS and on the open-source YottaDB.
+            <a
+              href="{{ "/build" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >How a release is built</a>
+            covers the recipe and what is still missing.
+          </p>
+        </li>
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+            3 &middot; Out
+          </p>
+          <h3 class="mt-1 font-semibold text-neutral-900 dark:text-white">
+            Working images
+          </h3>
+          <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+            A release becomes images that start a running RPMS server.
+            <a
+              href="{{ "/install" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Install RPMS</a>
+            runs one on your own machine.
+            <a
+              href="{{ "/demo" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >Try it</a>
+            opens the public demo, with test data only.
+          </p>
+        </li>
+        <li class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5">
+          <p class="text-xs font-semibold uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+            4 &middot; Interface
+          </p>
+          <h3 class="mt-1 font-semibold text-neutral-900 dark:text-white">
+            The RPCs
+          </h3>
+          <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+            The server answers named requests, called RPCs.
+            They are how every
+            <a
+              href="{{ "/applications" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >application</a>
+            reads and writes the record.
+            <a
+              href="{{ "/rpcs" | relative_url }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >RPCs</a>
+            explains them and counts what a release registers.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+        Inside the server
+      </h2>
+      <p class="mb-6 text-neutral-600 dark:text-neutral-400">
+        The data and the rules are the part worth understanding, whatever application sits on top.
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a
+          href="{{ "/domain-model" | relative_url }}"
+          class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+        >
+          <h3 class="font-semibold text-neutral-900 dark:text-white">
+            Domain Model
+          </h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            The core records, such as patient, visit, order, problem, and result, and how they relate.
+          </p>
+        </a>
+        <a
+          href="{{ "/architecture" | relative_url }}"
+          class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+        >
+          <h3 class="font-semibold text-neutral-900 dark:text-white">
+            Architecture
+          </h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            The layers of the server, the shared infrastructure packages, and why each facility runs its own copy.
+          </p>
+        </a>
+        <a
+          href="{{ "/security" | relative_url }}"
+          class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+        >
+          <h3 class="font-semibold text-neutral-900 dark:text-white">
+            Security
+          </h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            Who can do what, electronic signatures, and the audit trail.
+          </p>
+        </a>
+        <a
+          href="{{ "/packages" | relative_url }}"
+          class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-5 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors"
+        >
+          <h3 class="font-semibold text-neutral-900 dark:text-white">
+            Packages
+          </h3>
+          <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+            Every package on the server, by clinical, administrative, and infrastructure area.
+          </p>
+        </a>
+      </div>
+    </section>
+
+    {% include layer-links.html layer="rpms" current="/rpms" %}
+
+  </main>
+</div>

@@ -8,9 +8,12 @@
 - url: /security
   name: Security patterns
   summary: Kernel access control, audit trails, and e-prescribing of controlled substances.
+- url: /packages
+  name: Packages
+  summary: Every RPMS package by domain, with its namespace.
 - url: /applications
-  name: Application catalog
-  summary: Every RPMS application by domain, with its namespace.
+  name: Applications
+  summary: "The interfaces people work in, built on the RPCs: the chart, the panel, the front desk, and the web."
 - url: /workflows/hospital-view
   name: Hospital-wide process view
   summary: Every clinical and administrative workflow on one canvas.

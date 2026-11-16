@@ -1,0 +1,57 @@
+---
+layout: default
+title: "Glossary"
+description: "Plain-language definitions of the terms used to describe RPMS, from BCER to YottaDB."
+---
+
+<div class="bg-white dark:bg-neutral-950">
+  {% include nav.html %}
+
+  <main class="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-5xl">
+        Glossary
+      </h1>
+      <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+        RPMS comes with a lot of names and acronyms.
+        Here is what each one means, in plain language.
+        New to RPMS?
+        Start with
+        <a
+          href="{{ "/about-rpms" | relative_url }}"
+          class="underline hover:text-neutral-900 dark:hover:text-white"
+        >About RPMS</a>.
+      </p>
+    </div>
+
+    <dl class="divide-y divide-neutral-200 dark:divide-neutral-800 border-y border-neutral-200 dark:border-neutral-800">
+      {% for entry in site.data.glossary %}
+      <div
+        id="{{ entry.id }}"
+        class="py-5 sm:grid sm:grid-cols-4 sm:gap-6 scroll-mt-6"
+      >
+        <dt class="font-semibold text-neutral-900 dark:text-white">
+          {{ entry.term }}
+        </dt>
+        <dd class="mt-1 sm:mt-0 sm:col-span-3 text-neutral-700 dark:text-neutral-300">
+          {{ entry.definition }}
+          {% if entry.see %}
+          <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+            See also:
+            {% for ref in entry.see %}
+            {% assign target = site.data.glossary | where: "id", ref | first %}
+            <a
+              href="#{{ ref }}"
+              class="underline hover:text-neutral-900 dark:hover:text-white"
+            >{{ target.term }}</a>{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          </p>
+          {% endif %}
+        </dd>
+      </div>
+      {% endfor %}
+    </dl>
+
+  </main>
+</div>
